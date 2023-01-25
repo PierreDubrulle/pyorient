@@ -87,19 +87,18 @@ class OrientSocket(object):
         Could raise :class:`PyOrientConnectionPoolException`
         """
         dlog("Trying to connect...")
-        try:
-            self._socket.settimeout(SOCK_CONN_TIMEOUT)  # 30 secs of timeout
-            self._socket.connect((self.host, self.port))
-            _value = self._socket.recv(FIELD_SHORT['bytes'])
+        self._socket.settimeout(SOCK_CONN_TIMEOUT)  # 30 secs of timeout
+        self._socket.connect((self.host, self.port))
+        _value = self._socket.recv(FIELD_SHORT['bytes'])
 
-            if len(_value) != 2:
-                self._socket.close()
+        if len(_value) != 2:
+            self._socket.close()
 
-                raise PyOrientConnectionPoolException(
-                    "Server sent empty string", []
-                )
+            raise PyOrientConnectionPoolException(
+                "Server sent empty string", []
+            )
 
-            self.protocol = struct.unpack('!h', _value)[0]
+        self.protocol = struct.unpack('!h', _value)[0]
 
             #            if self.protocol > SUPPORTED_PROTOCOL:
             #                raise PyOrientWrongProtocolVersionException(
