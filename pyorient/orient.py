@@ -105,11 +105,11 @@ class OrientSocket(object):
             #                raise PyOrientWrongProtocolVersionException(
             #                    "Protocol version " + str(self.protocol) +
             #                    " is not supported yet by this client.", [])
-            self.connected = True
+            # self.connected = True
 
-        except socket.error as e:
-            self.connected = False
-            raise PyOrientConnectionException("Socket Error: %s" % e, [])
+        # except socket.error as e:
+            # self.connected = False
+            # raise PyOrientConnectionException("Socket Error: %s" % e, [])
 
     def close(self):
         """Close the inner connection."""
